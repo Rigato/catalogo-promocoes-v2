@@ -1,0 +1,30 @@
+--- template.html	2026-09-22 11:33:02.166713923 +0000
++++ template_patched.html	2026-09-22 11:33:02.177266167 +0000
+@@ -1715,17 +1715,20 @@
+ function renderActionChips(promo, isPrimary) {
+   if (!promo) return '';
+   const code = promo.shortCode || '??';
+-  // Prefer allDiscounts (richer — captures the full ladder of tiers in a
+-  // progressivo, the multiple LE tiers in a revendedor-matrix, etc.).
+-  // Fall back to the single `discount` value from the spreadsheet when the
+-  // description doesn't mention any % explicitly.
++  // Patch 2026-09-22: priorizar o discount da COLUNA paralela
++  // (Desconto Promoção ...) sobre o allDiscounts (regex do texto).
++  // A coluna é a fonte da verdade do desconto real; o texto pode mencionar
++  // "até 50%" como teto e o desconto real ser outro (ex: 25%).
++  // Fallback pro allDiscounts apenas se a coluna estiver vazia (null) ou
++  // for literalmente zero (caso comum: "Compre 3 pague 2, até 33% de desc"
++  // — coluna=0 indica que não há desconto base e o valor real vem do texto).
+   let text = '';
+-  if (promo.allDiscounts && promo.allDiscounts.length) {
+-    text = fmtPctList(promo.allDiscounts);
+-  } else if (promo.discount != null) {
++  if (promo.discount != null && promo.discount > 0) {
+     text = Number.isInteger(promo.discount)
+       ? `${promo.discount}%`
+       : `${promo.discount.toString().replace('.', ',')}%`;
++  } else if (promo.allDiscounts && promo.allDiscounts.length) {
++    text = fmtPctList(promo.allDiscounts);
+   }
+   if (isPrimary) {
+     return `<span class="row-action" data-code="${escapeHtml(code)}" title="${escapeHtml(promo.description)}">${escapeHtml(code)} ${escapeHtml(text)}</span>`;

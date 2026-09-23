@@ -1,0 +1,2773 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Catálogo de Promoções — Próximo Ciclo + 1</title>
+<style>
+:root {
+  /* Brand & UI palette — default is a bold gray */
+  --bg: #b8bac0;
+  --bg-page: #b8bac0;
+  --surface: #ffffff;
+  --surface-2: #ebecf0;
+  --border: #a8acb5;
+  --border-strong: #888c95;
+  --text: #1c2624;
+  --text-muted: #5b6663;
+  --text-dim: #8a948f;
+
+  /* Sticky header */
+  --header-bg: #1f5749;
+  --header-bg-2: #2a6957;
+  --header-text: #f5f9f6;
+  --header-text-dim: #b9d6cb;
+
+  /* Brand colors */
+  --brand-bot: #16a34a;       /* verde */
+  --brand-bot-soft: #e1f5e9;
+  --brand-eud: #7c3aed;        /* roxo */
+  --brand-eud-soft: #efe7ff;
+  --brand-qdb: #c026d3;        /* magenta */
+  --brand-qdb-soft: #fae8ff;
+  --brand-oui: #991b1b;        /* vermelho sangue */
+  --brand-oui-soft: #fce4e4;
+
+  /* Promotion depth */
+  --disc-1: #2f9e44;
+  --disc-1-bg: #e6f5ea;
+  --disc-2: #c49200;
+  --disc-2-bg: #fff3cf;
+  --disc-3: #c0392b;
+  --disc-3-bg: #fde2dd;
+  --disc-4: #b3156a;
+  --disc-4-bg: #fbe1ee;
+
+  /* Class colors */
+  --cl-A: #2f9e44;
+  --cl-A-bg: #e6f5ea;
+  --cl-B: #c49200;
+  --cl-B-bg: #fff3cf;
+  --cl-C: #c0392b;
+  --cl-C-bg: #fde2dd;
+  --cl-X: #7a8580;
+  --cl-X-bg: #eef0ee;
+
+  /* Action-type palette (used by short-code chips on each product row) */
+  --at-DD: #1e5b8c;   --at-DD-bg: #dde8f3;   /* Desconto Direto */
+  --at-LE: #2f6b3a;   --at-LE-bg: #dcefe1;   /* Lucro Extra */
+  --at-PG: #c47400;   --at-PG-bg: #fbecd0;   /* Progressivo */
+  --at-VL: #6c3fa0;   --at-VL-bg: #e7daf3;   /* Volumetria */
+  --at-CB: #a82828;   --at-CB-bg: #f6d6d6;   /* Combo */
+  --at-CP: #7e2020;   --at-CP-bg: #efc8c8;   /* Combo Preço Fixo */
+  --at-PP: #b3156a;   --at-PP-bg: #fbe1ee;   /* Primeiro Pedido */
+  --at-BR: #5a4632;   --at-BR-bg: #ece1d2;   /* Brinde / Recompra */
+  --at-??: #7a8580;   --at-??-bg: #eef0ee;   /* Outra */
+
+  /* Combo accent */
+  --combo: #6d28d9;
+  --combo-bg: #ede9fe;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+
+/* White theme override (toggle turns OFF the gray) */
+body.theme-white {
+  --bg: #ffffff;
+  --bg-page: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #faf8f3;
+  --border: #e5e2da;
+  --border-strong: #c8c4b8;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===================== HEADER ===================== */
+.app-hero {
+  background: linear-gradient(135deg, var(--header-bg) 0%, var(--header-bg-2) 100%);
+  color: var(--header-text);
+  padding: 26px 28px 22px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.app-hero-inner { max-width: 1320px; margin: 0 auto; }
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--header-text-dim);
+}
+.app-hero h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 6px 0 10px;
+  letter-spacing: -0.015em;
+}
+.app-hero p {
+  margin: 0 0 22px;
+  font-size: 13.5px;
+  color: var(--header-text-dim);
+  max-width: 920px;
+  line-height: 1.55;
+}
+.app-hero p strong { color: var(--header-text); font-weight: 600; }
+
+/* Metric strip */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 6px;
+}
+.metric {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  backdrop-filter: blur(4px);
+  transition: all 0.15s ease;
+}
+.metric.active {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.4);
+}
+.metric .label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--header-text-dim);
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.metric .value {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.metric .sub {
+  font-size: 11px;
+  color: var(--header-text-dim);
+  margin-top: 4px;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.dot-all { background: #ffffff; }
+.dot-bot { background: var(--brand-bot); }
+.dot-eud { background: var(--brand-eud); }
+.dot-qdb { background: var(--brand-qdb); }
+.dot-oui { background: var(--brand-oui); }
+
+/* ===================== MAIN ===================== */
+.app {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 18px 28px 80px;
+}
+
+/* Launch toggle (separate visual style) */
+.chip-launch {
+  border: 1px solid var(--disc-2);
+  background: rgba(255,255,255,0.04);
+  color: var(--header-text);
+}
+.chip-launch:hover { background: rgba(255,255,255,0.10); }
+.chip-launch[aria-pressed="true"] {
+  background: var(--disc-2);
+  border-color: var(--disc-2);
+  color: white;
+  font-weight: 600;
+}
+
+/* ===================== STICKY TOOLBAR ===================== */
+.toolbar {
+  background: linear-gradient(135deg, var(--header-bg) 0%, var(--header-bg-2) 100%);
+  color: var(--header-text);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 12px;
+  z-index: 50;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+}
+.toolbar-row + .toolbar-row { padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.12); }
+
+.toolbar .filter-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--header-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.chip {
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.04);
+  color: var(--header-text);
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.12s ease;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.chip:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.3); }
+.chip[aria-pressed="true"] {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--header-bg);
+  font-weight: 600;
+}
+.chip .count {
+  font-size: 11px;
+  opacity: 0.75;
+  background: rgba(0,0,0,0.10);
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+.chip[aria-pressed="true"] .count {
+  background: rgba(31, 87, 73, 0.15);
+  color: var(--header-bg);
+  opacity: 1;
+}
+
+/* Curva chip — color coded */
+.chip-curva[data-cl="A"] { border-color: var(--cl-A); }
+.chip-curva[data-cl="A"][aria-pressed="true"] { background: var(--cl-A); border-color: var(--cl-A); color: white; }
+.chip-curva[data-cl="B"] { border-color: var(--cl-B); }
+.chip-curva[data-cl="B"][aria-pressed="true"] { background: var(--cl-B); border-color: var(--cl-B); color: white; }
+.chip-curva[data-cl="C"] { border-color: var(--cl-C); }
+.chip-curva[data-cl="C"][aria-pressed="true"] { background: var(--cl-C); border-color: var(--cl-C); color: white; }
+.chip-curva[data-cl="X"] { border-color: var(--cl-X); }
+.chip-curva[data-cl="X"][aria-pressed="true"] { background: var(--cl-X); border-color: var(--cl-X); color: white; }
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  flex: 1;
+  min-width: 240px;
+  max-width: 420px;
+}
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  flex: 1;
+  color: var(--header-text);
+}
+.search-box input::placeholder { color: var(--header-text-dim); }
+.search-box svg { color: var(--header-text-dim); flex-shrink: 0; }
+
+.cat-dropdown { position: relative; min-width: 220px; }
+.cat-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--header-text);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  width: 100%;
+  text-align: left;
+}
+.cat-trigger:hover { background: rgba(255,255,255,0.14); }
+.cat-trigger .label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cat-trigger svg { color: var(--header-text-dim); flex-shrink: 0; }
+.cat-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 6px;
+  z-index: 60;
+  min-width: 240px;
+}
+.cat-menu.open { display: block; }
+.cat-menu label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cat-menu label:hover { background: var(--surface-2); }
+.cat-menu input[type="checkbox"] { accent-color: var(--header-bg); }
+.cat-menu .cat-actions {
+  display: flex;
+  gap: 8px;
+  padding: 4px 8px 6px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+.cat-menu .cat-actions button {
+  background: transparent;
+  border: none;
+  color: var(--header-bg);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.cat-menu .cat-actions button:hover { text-decoration: underline; }
+
+.sort-select, .theme-toggle {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--header-text);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  cursor: pointer;
+}
+.sort-select option { color: var(--text); background: #ffffff; }
+.theme-toggle:hover { background: rgba(255,255,255,0.16); }
+
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,0.25);
+  background: transparent;
+  color: var(--header-text);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.10); }
+
+.summary-line {
+  font-size: 12.5px;
+  color: var(--header-text-dim);
+}
+.summary-line strong { color: var(--header-text); font-weight: 700; }
+
+/* ===================== BRAND SECTION ===================== */
+.brand-section { margin-top: 24px; }
+.brand-section:first-of-type { margin-top: 22px; }
+.brand-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.brand-header {
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.brand-mark {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: white;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+.brand-mark[data-brand="BOTICARIO"] { background: var(--brand-bot); }
+.brand-mark[data-brand="EUDORA"] { background: var(--brand-eud); }
+.brand-mark[data-brand="QDB"] { background: var(--brand-qdb); }
+.brand-mark[data-brand="OUI"] { background: var(--brand-oui); }
+.brand-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.brand-meta {
+  margin-left: auto;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  text-align: right;
+}
+.brand-meta strong { color: var(--text); font-weight: 700; }
+
+.brand-top5-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 14px;
+}
+@media (max-width: 900px) {
+  .brand-top5-grid { grid-template-columns: 1fr; }
+}
+
+/* ===================== TOP 5 PANEL ===================== */
+.top5-panel {
+  background: linear-gradient(180deg, #fbfbfd 0%, #f5f6f9 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 22px 16px;
+}
+.top5-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.top5-head svg { color: var(--header-bg); }
+.top5-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.top5-item {
+  display: grid;
+  grid-template-columns: 28px 70px 1fr 70px 70px 56px;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text);
+  width: 100%;
+}
+.top5-item:hover {
+  border-color: var(--header-bg);
+  background: rgba(31, 87, 73, 0.06);
+  transform: translateX(2px);
+}
+.top5-rank {
+  display: grid;
+  place-items: center;
+  background: var(--header-bg);
+  color: white;
+  font-weight: 800;
+  font-size: 12px;
+  border-radius: 50%;
+  width: 24px; height: 24px;
+}
+.top5-sku {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.top5-desc {
+  font-weight: 500;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.top5-metric {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.top5-metric strong { color: var(--text); font-weight: 700; font-size: 12px; }
+.top5-disc {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+.top5-disc[data-depth="1"] { background: var(--disc-1-bg); color: var(--disc-1); }
+.top5-disc[data-depth="2"] { background: var(--disc-2-bg); color: var(--disc-2); }
+.top5-disc[data-depth="3"] { background: var(--disc-3-bg); color: var(--disc-3); }
+.top5-disc[data-depth="4"] { background: var(--disc-4-bg); color: var(--disc-4); }
+.top5-item:focus { outline: 2px solid var(--header-bg); outline-offset: 1px; }
+.top5-empty {
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* Action type badge in header (next to discount) */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.type-badge[data-type="consumidor"] { background: var(--cons-soft); color: var(--cons); }
+.type-badge[data-type="revendedor"] { background: var(--rev-soft); color: var(--rev); }
+.type-badge[data-type="mista"] { background: var(--mista-soft); color: var(--mista); }
+.type-badge[data-type="outra"] { background: #eef0f6; color: var(--text-muted); }
+
+/* Reset button */
+.chip-reset {
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(220, 60, 60, 0.12);
+  color: #ffcfcf;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.chip-reset:hover { background: rgba(220, 60, 60, 0.25); color: white; }
+.chip-reset[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+/* ========= v2: Type sections ========= */
+.type-section { border-bottom: 1px solid var(--border); }
+.type-section:last-child { border-bottom: none; }
+.type-head {
+  padding: 14px 22px;
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer; user-select: none;
+  /* Bege do v1 — mesmo tom que o action-head usava, dá calor ao cabeçalho do tipo */
+  background: #f3efe6;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s ease;
+}
+.type-head:hover { background: #efeae0; }
+.type-mark {
+  display: inline-block; width: 6px; height: 26px;
+  border-radius: 3px;
+  background: #94a3b8;
+}
+.type-mark[data-type="desconto_direto"] { background: #16a34a; }
+.type-mark[data-type="lucro_extra"] { background: #c49200; }
+.type-mark[data-type="combo"] { background: #b3156a; }
+.type-mark[data-type="combo_preco"] { background: #ec4899; }
+.type-mark[data-type="progressivo"] { background: #0ea5e9; }
+.type-mark[data-type="volumetria"] { background: #14b8a6; }
+.type-mark[data-type="primeiro_pedido"] { background: #6366f1; }
+.type-mark[data-type="brinde"] { background: #6b7280; }
+.type-mark[data-type="outra"] { background: #94a3b8; }
+.type-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.type-meta {
+  margin-left: auto; font-size: 12px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 12px;
+}
+.type-meta strong { color: var(--text); font-weight: 700; }
+.type-chevron {
+  color: var(--text-dim); transition: transform 0.18s ease;
+  flex-shrink: 0;
+}
+.type-section.open .type-chevron { transform: rotate(180deg); }
+.type-body {
+  max-height: 0; overflow: hidden; transition: max-height 0.25s ease;
+}
+.type-section.open .type-body { max-height: 12000px; }
+
+/* Subgroups (Linha/Categoria/Profundidade) — colapsáveis */
+.subgroup { background: var(--surface); border-bottom: 1px solid var(--border); }
+.subgroup:last-child { border-bottom: none; }
+.subgroup-head {
+  padding: 9px 22px 9px 22px;
+  background: var(--surface-2);
+  font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--text-muted);
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.08s ease;
+}
+.subgroup-head:hover { background: rgba(31, 87, 73, 0.06); }
+.subgroup-name {
+  color: var(--text); font-size: 12.5px;
+  text-transform: none; letter-spacing: -0.01em; font-weight: 700;
+}
+.subgroup-count {
+  font-weight: 500; color: var(--text-dim); font-size: 11px;
+  text-transform: none; letter-spacing: 0;
+}
+.subgroup-chevron {
+  transition: transform 0.12s ease;
+  color: var(--text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.subgroup.collapsed .subgroup-chevron { transform: rotate(-90deg); }
+.subgroup.collapsed .subgroup-body { display: none; }
+
+/* Secondary info pill on each product row */
+.secondary-info {
+  display: inline-block; font-size: 10.5px;
+  padding: 2px 8px;
+  background: var(--surface-2); color: var(--text-muted);
+  border-radius: 4px; font-weight: 600;
+  margin-left: 8px; white-space: nowrap;
+}
+
+/* v2: Product row with hover tooltip showing parent action description */
+.product-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 22px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 13px;
+  transition: background 0.08s ease;
+}
+.product-row:hover { background: rgba(31, 87, 73, 0.04); }
+.product-row:last-child { border-bottom: none; }
+.product-row .sku {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  min-width: 70px;
+  flex-shrink: 0;
+}
+.product-row .desc {
+  flex: 0 1 auto;
+  font-weight: 500;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.product-row .cl-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  min-width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.product-row .cl-badge[data-cl="A"] { background: var(--cl-A-bg); color: var(--cl-A); }
+.product-row .cl-badge[data-cl="B"] { background: var(--cl-B-bg); color: var(--cl-B); }
+.product-row .cl-badge[data-cl="C"] { background: var(--cl-C-bg); color: var(--cl-C); }
+.product-row .cl-badge[data-cl="X"] { background: var(--cl-X-bg); color: var(--cl-X); }
+.product-row .row-disc {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.product-row .row-disc[data-depth="1"] { background: var(--disc-1-bg); color: var(--disc-1); }
+.product-row .row-disc[data-depth="2"] { background: var(--disc-2-bg); color: var(--disc-2); }
+.product-row .row-disc[data-depth="3"] { background: var(--disc-3-bg); color: var(--disc-3); }
+.product-row .row-disc[data-depth="4"] { background: var(--disc-4-bg); color: var(--disc-4); }
+.product-row .row-disc[data-depth="none"] { background: var(--cl-X-bg); color: var(--cl-X); }
+.product-row .volproj {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  min-width: 130px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.product-row .volproj strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Action-type chips on the product row.
+   .row-action is the PRIMARY chip (the action that owns this row).
+   .row-extra is a smaller sibling chip showing the OTHER actions of the
+   same product (so the user can see at a glance "this product also has
+   a LE 10% tier, and a PG 8%/10% ladder"). */
+.product-row .row-action,
+.product-row .row-extra {
+  flex-shrink: 0;
+}
+/* The linha pill is shown after the sibling chips, before vol/proj.
+   margin-left:auto pushes the pill (and everything after it) to the right
+   of the row, so the sibling chips stay glued to the description on the left. */
+.product-row .linha-pill {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.row-action {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  cursor: default;
+  border: 1px solid transparent;
+}
+.row-action[data-code="DD"] { background: var(--at-DD-bg); color: var(--at-DD); border-color: var(--at-DD); }
+.row-action[data-code="LE"] { background: var(--at-LE-bg); color: var(--at-LE); border-color: var(--at-LE); }
+.row-action[data-code="PG"] { background: var(--at-PG-bg); color: var(--at-PG); border-color: var(--at-PG); }
+.row-action[data-code="VL"] { background: var(--at-VL-bg); color: var(--at-VL); border-color: var(--at-VL); }
+.row-action[data-code="CB"] { background: var(--at-CB-bg); color: var(--at-CB); border-color: var(--at-CB); }
+.row-action[data-code="CP"] { background: var(--at-CP-bg); color: var(--at-CP); border-color: var(--at-CP); }
+.row-action[data-code="PP"] { background: var(--at-PP-bg); color: var(--at-PP); border-color: var(--at-PP); }
+.row-action[data-code="BR"] { background: var(--at-BR-bg); color: var(--at-BR); border-color: var(--at-BR); }
+.row-action[data-code="??"] { background: var(--at-??-bg); color: var(--at-??); border-color: var(--at-??); }
+.row-extra {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  opacity: 0.85;
+  cursor: help;
+  border: 1px dashed currentColor;
+  background: transparent;
+}
+.row-extra[data-code="DD"] { color: var(--at-DD); }
+.row-extra[data-code="LE"] { color: var(--at-LE); }
+.row-extra[data-code="PG"] { color: var(--at-PG); }
+.row-extra[data-code="VL"] { color: var(--at-VL); }
+.row-extra[data-code="CB"] { color: var(--at-CB); }
+.row-extra[data-code="CP"] { color: var(--at-CP); }
+.row-extra[data-code="PP"] { color: var(--at-PP); }
+.row-extra[data-code="BR"] { color: var(--at-BR); }
+.row-extra[data-code="??"] { color: var(--at-??); }
+.row-actions .row-extra-list {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+/* Legend row inside the toolbar */
+.toolbar-row.legend-row {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.78);
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+}
+.legend-row .legend-text {
+  color: rgba(255,255,255,0.78);
+  margin-right: 4px;
+}
+.legend-row .filter-label {
+  color: rgba(255,255,255,0.6);
+}
+.legend-row .row-action,
+.legend-row .row-extra {
+  cursor: default !important;
+}
+
+/* Axis toggle (3 mutually-exclusive chips) */
+.grp-toggle {
+  display: inline-flex;
+  background: rgba(0,0,0,0.20);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+.grp-toggle button {
+  border: none; background: transparent; color: var(--header-text-dim);
+  font-size: 12.5px; font-weight: 600;
+  padding: 5px 14px; border-radius: 999px; cursor: pointer;
+  transition: all 0.12s ease;
+}
+.grp-toggle button:hover { color: var(--header-text); }
+.grp-toggle button[aria-pressed="true"] {
+  background: white; color: var(--header-bg);
+}
+.grp-toggle .glyph {
+  display: inline-block; margin-right: 5px; opacity: 0.8;
+}
+.grp-toggle button[aria-pressed="true"] .glyph { opacity: 1; }
+
+/* Top 10 full view */
+.top10-grid {
+  background: var(--surface);
+}
+.top10-grid-head, .top10-full-row {
+  display: grid;
+  grid-template-columns: 36px 90px 1fr 160px 60px 90px 90px 70px;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 22px;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+}
+.top10-grid-head {
+  background: var(--surface-2);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+}
+.top10-grid-head .head {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.top10-full-row {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.1s ease, transform 0.1s ease;
+  color: var(--text);
+  width: 100%;
+}
+.top10-full-row:last-child { border-bottom: none; }
+.top10-full-row:hover {
+  background: rgba(31, 87, 73, 0.05);
+}
+.top10-full-row:focus {
+  outline: 2px solid var(--header-bg);
+  outline-offset: -2px;
+}
+.top10-full-row .top5-rank {
+  width: 28px;
+  height: 28px;
+  font-size: 13px;
+}
+.top10-full-row .top5-desc {
+  max-width: 100%;
+}
+.top10-full-row .top10-cat {
+  font-size: 12px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.top10-full-row .top5-disc-cell {
+  text-align: right;
+}
+.top10-full-row .top5-metric {
+  text-align: right;
+}
+@media (max-width: 980px) {
+  .top10-grid-head, .top10-full-row {
+    grid-template-columns: 36px 90px 1fr 90px 60px 70px 70px;
+    gap: 8px;
+  }
+  .top10-grid-head .head.top5-metric:nth-of-type(1),
+  .top10-grid-head .head.top5-metric:nth-of-type(2),
+  .top10-full-row .top5-metric:nth-of-type(1),
+  .top10-full-row .top5-metric:nth-of-type(2) {
+    /* hide vol/proj on narrow screens */
+  }
+  .top10-cat { display: none; }
+  .top10-grid-head .head.top10-cat { display: none; }
+}
+
+/* Simplified hero */
+.app-hero {
+  padding: 22px 28px 18px;
+}
+.app-hero h1 {
+  font-size: 26px;
+  margin: 4px 0 6px;
+}
+.app-hero .cycle-label {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-left: 8px;
+}
+.app-hero .subtitle-mini {
+  font-size: 12.5px;
+  color: var(--header-text-dim);
+  margin: 0 0 16px;
+  max-width: 920px;
+}
+.app-hero .metrics {
+  margin-top: 4px;
+}
+.app-hero .metric {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  backdrop-filter: blur(4px);
+  transition: all 0.15s ease;
+}
+.app-hero .metric.active {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.4);
+}
+.app-hero .metric .label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--header-text-dim);
+  font-weight: 700;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.app-hero .metric .value {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.app-hero .metric .sub {
+  font-size: 11px;
+  color: var(--header-text-dim);
+  margin-top: 3px;
+}
+
+/* ===================== ACTION CARDS ===================== */
+.action { border-bottom: 1px solid var(--border); }
+.action:last-child { border-bottom: none; }
+.action-head {
+  padding: 14px 22px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  user-select: none;
+  transition: background 0.12s ease;
+  background: #f3efe6;
+  border-left: 3px solid transparent;
+}
+.action-head:hover { background: #efeae0; }
+.action.open .action-head { border-left-color: var(--header-bg); }
+
+.action-head-row1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.disc-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.disc-badge[data-depth="1"] { background: var(--disc-1-bg); color: var(--disc-1); }
+.disc-badge[data-depth="2"] { background: var(--disc-2-bg); color: var(--disc-2); }
+.disc-badge[data-depth="3"] { background: var(--disc-3-bg); color: var(--disc-3); }
+.disc-badge[data-depth="4"] { background: var(--disc-4-bg); color: var(--disc-4); }
+
+.combo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  background: var(--combo-bg);
+  color: var(--combo);
+  white-space: nowrap;
+}
+.combo-badge .arrow { font-size: 10px; opacity: 0.7; }
+
+.cycle-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.action-summary {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+.chevron {
+  color: var(--text-dim);
+  transition: transform 0.18s ease;
+  flex-shrink: 0;
+}
+.action.open .chevron { transform: rotate(180deg); }
+
+.action-desc {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.action-desc[data-truncated="true"] { cursor: pointer; }
+.action-desc[data-truncated="true"]:hover { color: var(--header-bg); }
+
+.action-body {
+  background: var(--surface);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+.action.open .action-body { max-height: 8000px; }
+
+/* ===================== PRODUCT TABLE ===================== */
+.table-wrap { overflow-x: auto; }
+table.products {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+table.products thead th {
+  text-align: left;
+  background: var(--surface-2);
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  white-space: nowrap;
+  user-select: none;
+}
+table.products thead th.sortable {
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+table.products thead th.sortable:hover {
+  background: rgba(31, 87, 73, 0.08);
+  color: var(--header-bg);
+}
+table.products thead th .sort-arrow {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 10px;
+  opacity: 0.4;
+}
+table.products thead th.sorted .sort-arrow { opacity: 1; color: var(--header-bg); }
+table.products thead th.sorted.sorted-asc .sort-arrow::before { content: "▲"; }
+table.products thead th.sorted.sorted-desc .sort-arrow::before { content: "▼"; }
+table.products thead th.sorted .sort-arrow::before { font-size: 9px; }
+table.products thead th .sort-pos {
+  font-size: 9px;
+  background: var(--header-bg);
+  color: white;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 4px;
+  font-weight: 700;
+}
+
+table.products thead th.num { text-align: right; }
+table.products tbody tr { border-bottom: 1px solid var(--border); }
+table.products tbody tr:hover { background: rgba(31, 87, 73, 0.04); }
+table.products tbody tr:last-child { border-bottom: none; }
+table.products td {
+  padding: 9px 12px;
+  vertical-align: middle;
+}
+table.products td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.sku {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.desc { font-weight: 500; color: var(--text); }
+.cat-cell { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+.dim { color: var(--text-dim); }
+
+.cl-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  min-width: 24px;
+  text-align: center;
+  white-space: nowrap;
+}
+.cl-badge[data-cl="A"] { background: var(--cl-A-bg); color: var(--cl-A); }
+.cl-badge[data-cl="B"] { background: var(--cl-B-bg); color: var(--cl-B); }
+.cl-badge[data-cl="C"] { background: var(--cl-C-bg); color: var(--cl-C); }
+.cl-badge[data-cl="X"] { background: var(--cl-X-bg); color: var(--cl-X); }
+
+.row-disc {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.row-disc[data-depth="1"] { background: var(--disc-1-bg); color: var(--disc-1); }
+.row-disc[data-depth="2"] { background: var(--disc-2-bg); color: var(--disc-2); }
+.row-disc[data-depth="3"] { background: var(--disc-3-bg); color: var(--disc-3); }
+.row-disc[data-depth="4"] { background: var(--disc-4-bg); color: var(--disc-4); }
+.row-disc[data-depth="none"] { background: var(--cl-X-bg); color: var(--cl-X); }
+
+.sort-reset {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  margin-left: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+.sort-reset:hover { color: var(--header-bg); text-decoration: underline; }
+
+/* ===================== EMPTY ===================== */
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px dashed var(--border);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 760px) {
+  .app-hero { padding: 22px 16px 18px; }
+  .app { padding: 14px 14px 60px; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .app-hero h1 { font-size: 24px; }
+  .toolbar { position: relative; top: 0; }
+  table.products { font-size: 11.5px; }
+  table.products td { padding: 6px 6px; }
+}
+</style>
+</head>
+<body>
+
+<header class="app-hero">
+  <div class="app-hero-inner">
+    <h1>Catálogo de Promoções <span class="cycle-label" id="hero-cycle">—</span> <span style="font-size:14px; font-weight:500; color:var(--header-text-dim); margin-left:10px;">· v2</span></h1>
+    <p class="subtitle-mini">
+      Organizado por <strong>Marca</strong> (BOT → EUD → OUI → QDB) → <strong>Tipo de promoção</strong> → ação. Cada tipo é uma seção colapsável. Dentro de cada ação, os produtos são sub-agrupados conforme o toggle <em>Agrupar produtos por</em> (Categoria / Linha / Profundidade de desconto). O display secundário na linha de cada produto se adapta automaticamente (mostra Linha quando o agrupamento é Categoria, e Categoria nos outros casos).
+    </p>
+    <div class="metrics" id="hero-metrics">
+      <div class="metric" data-brand-metric="ALL">
+        <div class="label"><span class="dot dot-all"></span>Visão geral</div>
+        <div class="value" id="m-itens">0</div>
+        <div class="sub"><span id="m-grupos">0</span> grupos de promoção</div>
+      </div>
+      <div class="metric" data-brand-metric="BOTICARIO">
+        <div class="label"><span class="dot dot-bot"></span>Bot</div>
+        <div class="value" id="m-boti">0</div>
+        <div class="sub"><span id="m-boti-grp">0</span> grupos</div>
+      </div>
+      <div class="metric" data-brand-metric="EUDORA">
+        <div class="label"><span class="dot dot-eud"></span>Eud</div>
+        <div class="value" id="m-eudora">0</div>
+        <div class="sub"><span id="m-eudora-grp">0</span> grupos</div>
+      </div>
+      <div class="metric" data-brand-metric="OUI">
+        <div class="label"><span class="dot dot-oui"></span>OUI</div>
+        <div class="value" id="m-oui">0</div>
+        <div class="sub"><span id="m-oui-grp">0</span> grupos</div>
+      </div>
+      <div class="metric" data-brand-metric="QDB">
+        <div class="label"><span class="dot dot-qdb"></span>QDB</div>
+        <div class="value" id="m-qdb">0</div>
+        <div class="sub"><span id="m-qdb-grp">0</span> grupos</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- Top 10 panels — above sticky, respect brand filter -->
+  <div id="top-panels"></div>
+
+  <!-- Sticky filter toolbar -->
+  <div class="toolbar" id="toolbar">
+    <div class="toolbar-row">
+      <span class="filter-label">Marca</span>
+      <button class="chip" data-brand="ALL" aria-pressed="true">Todas <span class="count" id="cnt-all">0</span></button>
+      <button class="chip" data-brand="BOTICARIO" aria-pressed="false">Bot <span class="count" id="cnt-boti">0</span></button>
+      <button class="chip" data-brand="EUDORA" aria-pressed="false">Eud <span class="count" id="cnt-eudora">0</span></button>
+      <button class="chip" data-brand="OUI" aria-pressed="false">OUI <span class="count" id="cnt-oui">0</span></button>
+      <button class="chip" data-brand="QDB" aria-pressed="false">QDB <span class="count" id="cnt-qdb">0</span></button>
+
+      <span class="filter-label" style="margin-left:8px">Curva</span>
+      <button class="chip chip-curva" data-cl="A" aria-pressed="true">A</button>
+      <button class="chip chip-curva" data-cl="B" aria-pressed="true">B</button>
+      <button class="chip chip-curva" data-cl="C" aria-pressed="true">C</button>
+      <button class="chip chip-curva" data-cl="X" aria-pressed="true">outros</button>
+
+      <button class="chip chip-launch" id="launch-toggle" aria-pressed="false" title="Mostrar apenas lançamentos do ciclo">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20"/></svg>
+        Lançamentos do ciclo
+      </button>
+
+      <button id="top10-toggle" class="chip" aria-pressed="false" title="Modo Top 10 — mostra só os mais importantes por marca">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Top 10
+      </button>
+
+      <span class="filter-label" style="margin-left:8px">Agrupar produtos por</span>
+      <div class="grp-toggle" id="axis-toggle">
+        <button data-axis="categoria" aria-pressed="true">Categoria</button>
+        <button data-axis="linha" aria-pressed="false">Linha</button>
+        <button data-axis="desconto" aria-pressed="false">Profundidade</button>
+      </div>
+
+      <div class="cat-dropdown">
+        <button class="cat-trigger" id="cat-trigger">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+          <span class="label" id="cat-label">Filtrar categoria: Todas</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="cat-menu" id="cat-menu">
+          <div class="cat-actions">
+            <button id="cat-all">Selecionar todas</button>
+            <button id="cat-none">Limpar</button>
+          </div>
+          <div id="cat-options"></div>
+        </div>
+      </div>
+
+      <button id="theme-toggle" class="theme-toggle" title="Alternar fundo branco ↔ cinza">
+        <span id="theme-icon">◐</span> Fundo
+      </button>
+    </div>
+
+    <div class="toolbar-row">
+      <span class="filter-label">Buscar</span>
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" type="text" placeholder="SKU, descrição ou texto da promoção…" />
+      </div>
+
+      <span class="filter-label" style="margin-left:8px">Ordenar ações por</span>
+      <select id="sort" class="sort-select">
+        <option value="discount">Maior desconto potencial</option>
+        <option value="volume">Maior potencial de venda (histórico)</option>
+        <option value="nprods">Mais produtos primeiro</option>
+        <option value="cycle">Ciclo</option>
+      </select>
+
+      <span class="filter-label" style="margin-left:8px">Ordenar produtos por</span>
+      <select id="row-sort" class="sort-select">
+        <option value="default">Curva e descrição (padrão)</option>
+        <option value="discount-desc">Maior desconto (%)</option>
+        <option value="max_hist-desc">Maior volume histórico</option>
+        <option value="proj_c2-desc">Maior projeção de venda</option>
+      </select>
+
+      <span class="summary-line" style="margin-left:8px" id="summary-line">
+        <strong id="s-actions">0</strong> ações · <strong id="s-skus">0</strong> SKUs
+      </span>
+
+      <button id="expand-all" class="btn-ghost">Expandir tudo</button>
+      <button id="collapse-all" class="btn-ghost">Recolher tudo</button>
+      <button id="reset-all" class="chip-reset" title="Resetar todos os filtros">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        Limpar filtros
+      </button>
+    </div>
+
+    <div class="toolbar-row legend-row">
+      <span class="filter-label">Legenda</span>
+      <span class="row-action" data-code="DD" style="cursor:default">DD</span> <span class="legend-text">Desconto Direto</span>
+      <span class="row-action" data-code="LE" style="cursor:default">LE</span> <span class="legend-text">Lucro Extra</span>
+      <span class="row-action" data-code="PG" style="cursor:default">PG</span> <span class="legend-text">Desconto Progressivo (tiers por volume)</span>
+      <span class="row-action" data-code="VL" style="cursor:default">VL</span> <span class="legend-text">Desconto por Volume</span>
+      <span class="row-action" data-code="CB" style="cursor:default">CB</span> <span class="legend-text">Combo (X+Y)</span>
+      <span class="row-action" data-code="CP" style="cursor:default">CP</span> <span class="legend-text">Combo Preço Fixo</span>
+      <span class="row-action" data-code="PP" style="cursor:default">PP</span> <span class="legend-text">Primeiro Pedido</span>
+      <span class="row-action" data-code="BR" style="cursor:default">BR</span> <span class="legend-text">Brinde / Recompra</span>
+      <span class="row-extra" data-code="LE" style="cursor:default">LE 10%</span> <span class="legend-text">Ação adicional do mesmo produto (borda tracejada = não é o tipo da seção)</span>
+    </div>
+  </div>
+
+  <main id="content"></main>
+
+</div>
+
+<script>
+/* ===================== DATA ===================== */
+const DATA = __DATA_PLACEHOLDER__;
+
+/* ===================== HELPERS ===================== */
+const fmt = (n) => (n == null || n === '' || n === 0) ? '—' : Number(n).toLocaleString('pt-BR');
+const norm = (s) => (s || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+function discountDepth(d) {
+  if (d == null) return 'none';
+  if (d <= 15) return '1';
+  if (d <= 30) return '2';
+  if (d <= 40) return '3';
+  return '4';
+}
+function classDepth(c) {
+  if (c === 'A') return 'A';
+  if (c === 'B') return 'B';
+  if (c === 'C') return 'C';
+  return 'X';
+}
+function classSortKey(c) {
+  return { A: 0, B: 1, C: 2, X: 3 }[c] ?? 9;
+}
+
+function escapeHtml(s) {
+  return (s || '').toString()
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function truncate(s, n) {
+  s = (s || '').toString().replace(/\s+/g, ' ').trim();
+  if (s.length <= n) return { text: s, truncated: false };
+  return { text: s.slice(0, n).trim() + '…', truncated: true };
+}
+
+/* ===================== STATE ===================== */
+const state = {
+  brand: 'ALL',
+  curvas: new Set(['A', 'B', 'C', 'X']),
+  cats: new Set(),
+  q: '',
+  sort: 'discount',
+  rowSort: 'default',  // v2: ordem final dos produtos dentro de cada subgroup
+  theme: 'cream',  // cream | gray
+  launchesOnly: false,
+  top10Mode: false,
+  axis: 'categoria',  // v2: sub-agrupamento — categoria | linha | desconto
+  typesOpen: new Set(),         // v2: type sections abertas (marca:tipo)
+  typesOpenInitialized: false,  // v2: false → default tudo recolhido; vira true após primeiro toggle
+  subgroupsOpen: new Set(),     // v2: subgroups abertas (marca|tipo|subgroupKey)
+  subgroupsOpenInitialized: false, // v2: false → padrão tudo recolhido; vira true após primeiro toggle
+  // Per-action product sort stack (column key, direction)
+  // Each action gets its own sort stack, default applied on first render
+  actionSortStacks: new Map(),
+};
+
+// v2: Type constants
+const TYPE_NAMES = {
+  desconto_direto: 'Desconto Direto',
+  lucro_extra:     'Lucro Extra (Revendedor)',
+  combo:           'Combo — Compre X, Leve Y',
+  combo_preco:     'Combo Preço Fixo',
+  progressivo:     'Desconto Progressivo',
+  volumetria:      'Desconto por Volume',
+  primeiro_pedido: 'Primeiro Pedido',
+  brinde:          'Brinde / Recompra',
+  outra:           'Outra',
+};
+const TYPE_ORDER = [
+  'desconto_direto', 'lucro_extra', 'combo', 'combo_preco',
+  'progressivo', 'volumetria', 'primeiro_pedido', 'brinde', 'outra',
+];
+
+// v2: Discount bands for the "Profundidade" axis
+const DEPTH_BANDS = [
+  { lo: 0,  hi: 10, label: '0-10%' },
+  { lo: 11, hi: 25, label: '11-25%' },
+  { lo: 26, hi: 39, label: '26-39%' },
+  { lo: 40, hi: 999, label: '40%+' },
+];
+function depthBandFor(d) {
+  if (d == null || d === 0) return null;
+  for (const b of DEPTH_BANDS) {
+    if (d >= b.lo && d <= b.hi) return b;
+  }
+  return null;
+}
+
+// v2: Per-axis mapping
+const AXIS_FIELD = { categoria: 'categoria', linha: 'linha', desconto: null };
+const AXIS_SECONDARY = { categoria: 'linha', linha: 'categoria', desconto: 'categoria' };
+const AXIS_SECONDARY_LABEL = { categoria: 'Linha', linha: 'Categoria', desconto: 'Categoria' };
+const AXIS_LABEL = { categoria: 'Sub', linha: 'Linha', desconto: 'Faixa' };
+
+// Detect the "current cycle" from the data — most common promotion cycle
+// (used by the "Lançamentos do ciclo" toggle to know which Lançamento value to filter by)
+const CURRENT_CYCLE = (() => {
+  const counts = {};
+  for (const p of DATA.products) for (const pr of p.promotions) counts[pr.cycle] = (counts[pr.cycle]||0)+1;
+  const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]);
+  return sorted[0]?.[0] || '202611';
+})();
+function cycleToLancCode(cycle) {
+  return `C${cycle.slice(-2)}`;
+}
+const CURRENT_LANC_CODE = cycleToLancCode(CURRENT_CYCLE);
+
+/* ===================== DEFAULT SORT ===================== */
+// Categoria > Curva > Descrição (A-Z) > Desconto (maior→menor) > Maior vol (maior→menor)
+const DEFAULT_PRODUCT_SORT = [
+  { key: 'categoria', dir: 'asc' },
+  { key: 'classe', dir: 'asc' },
+  { key: 'descricao', dir: 'asc' },
+  { key: 'discount', dir: 'desc' },
+  { key: 'max_hist', dir: 'desc' },
+];
+
+const COL_DEFS = {
+  sku:         { label: 'SKU',             sortable: true,  type: 'string' },
+  descricao:   { label: 'Descrição',       sortable: true,  type: 'string' },
+  categoria:   { label: 'Categoria',       sortable: true,  type: 'string' },
+  classe:      { label: 'Curva',           sortable: true,  type: 'class' },
+  discount:    { label: 'Desconto',        sortable: true,  type: 'discount' },
+  max_hist:    { label: 'Maior vol.',      sortable: true,  type: 'number' },
+  proj_c2:     { label: 'Proj. C+2',       sortable: true,  type: 'number' },
+};
+
+/* ===================== INDEX ===================== */
+// Reseller tier names that often distinguish otherwise-identical promotions
+const RESELLER_TIERS = ['Cobre','Bronze','Prata','Ouro','Platina','Rubi','Esmeralda','Diamante'];
+const TIER_REGEX = new RegExp(`\\b(?:Cobre|Bronze|Prata|Ouro|Platina|Rubi|Esmeralda|Diamante)\\b`, 'gi');
+
+// Normalize action description to group similar promotions differing only by tier/etc.
+function normalizeActionDesc(desc) {
+  let d = desc;
+  // Strip "Revendedor X/Y:" or "Revendedor X:" prefix
+  d = d.replace(/^Revendedor\s+[\w\s\/\-À-ÿ]+:\s*/i, '');
+  // Strip "categoria [de cadastro] X" and "cadastro [da categoria] X"
+  d = d.replace(/\bcategoria\s+(?:de\s+cadastro\s+(?:da|do)\s+)?/gi, '');
+  d = d.replace(/\bcadastro\s+(?:da|do)\s+(?:categoria\s+)?/gi, '');
+  // Strip tier names
+  d = d.replace(TIER_REGEX, '');
+  // Normalize whitespace and trailing punctuation
+  d = d.replace(/\s+/g, ' ').trim().replace(/[.,;:]+$/, '');
+  return d;
+}
+
+// Classify an action (consumidor / revendedor / mista)
+function classifyActionText(desc) {
+  const d = norm(desc);
+  const hasRevendedor = /revendedor|lucro extra/i.test(d);
+  const hasConsumidor = /consumidor|franqueado|cupom|brinde/i.test(d);
+  if (hasRevendedor && hasConsumidor) return 'mista';
+  if (hasRevendedor) return 'revendedor';
+  if (hasConsumidor) return 'consumidor';
+  return 'outra';
+}
+
+// v2: derive product family/linha from description, since data.json has no
+// separate linha column. Strategy:
+//   - BOTICARIO: first word IS the linha (MALBEC, LILY, FLORATTA, MAKE B, ...);
+//     special case for "BOTI" prefix: only "BOTI BABY"/HOME/SUN are real sub-linhas;
+//     "BOTI NECESS"/etc fall back to subcategoria (NECESS is a product type).
+//   - EUDORA: first word when it's a real linha (NIINA, SIAGE, GLAM, ...);
+//     when prefix is brand code (EUD/REF/EUDORA), fall back to subcategoria.
+//   - OUI: subcategoria (the actual linha isn't encoded in the description).
+//   - QDB: subcategoria (same reason as OUI).
+//
+// V2.2+: the canonical list of valid linha names is provided at runtime via
+// DATA._meta.canonical_linhas (extracted from the user's MARCAS xlsx and
+// cached locally by the generate.py script). The derivation still uses the
+// description, but the canonical list is the source of truth for valid
+// names — candidates that match a canonical name (exact or first-word) are
+// normalized to the canonical version. Candidates that don't match fall
+// back to subcategoria. The built-in ABBREVIATION_MAP handles a few common
+// short forms (e.g. "CBEM" → "CUIDE-SE BEM") that don't appear verbatim in
+// the description.
+const EUDORA_PREFIX = new Set(['EUD', 'EUDORA']);
+const BOT_PREFIX = new Set(['BOTICARIO']);
+// Known BOTI sub-linhas — only these get a "BOTI X" linha label.
+// Everything else under "BOTI" (e.g. BOTI NECESS, BOTI KPACK) is a product type,
+// not a family, so it falls back to subcategoria.
+const BOTI_SUB_LINHAS = new Set(['BABY', 'HOME', 'SUN']);
+
+const _META = (DATA && DATA._meta) || {};
+const CANONICAL_LINHAS = (_META.canonical_linhas || []).map(s => String(s).toUpperCase());
+const ABBREVIATION_MAP = _META.abbreviation_map || {};
+
+// Build a fast lookup: first-word → canonical name
+const CANON_BY_FIRSTWORD = new Map();
+for (const c of CANONICAL_LINHAS) {
+  const w = c.split(/\s+/)[0].toUpperCase();
+  if (!CANON_BY_FIRSTWORD.has(w)) CANON_BY_FIRSTWORD.set(w, c);
+}
+
+function canonicalLinha(candidate) {
+  if (!candidate) return null;
+  const c = candidate.toUpperCase();
+  // 1. Exact match (case-insensitive)
+  for (const k of CANONICAL_LINHAS) {
+    if (k === c) return k;
+  }
+  // 2. First-word match against canonical's first word
+  const cw = c.split(/\s+/)[0];
+  if (CANON_BY_FIRSTWORD.has(cw)) return CANON_BY_FIRSTWORD.get(cw);
+  // 3. Abbreviation map for common short forms (e.g. CBEM, NSPA, DR)
+  if (ABBREVIATION_MAP && Object.prototype.hasOwnProperty.call(ABBREVIATION_MAP, cw)) {
+    const target = ABBREVIATION_MAP[cw];
+    if (target) return target.toUpperCase();
+  }
+  return null;
+}
+
+function deriveLinha(p) {
+  const desc = (p.descricao || '').trim();
+  let words = desc.split(/\s+/).filter(Boolean);
+  // "REF" prefix marks a refil (refill/repac) of another linha — it does NOT
+  // itself identify a linha or marca. Strip it and look at the next word.
+  while (words.length && words[0].toUpperCase() === 'REF') words = words.slice(1);
+  const marca = p.marca;
+  if (marca === 'OUI' || marca === 'QDB') {
+    return (p.subcategoria || '(OUTROS)').toUpperCase();
+  }
+  if (marca === 'EUDORA') {
+    const first = (words[0] || '').toUpperCase();
+    if (EUDORA_PREFIX.has(first)) return (p.subcategoria || '(OUTROS)').toUpperCase();
+    // Try the canonical list before falling back to subcategoria
+    const canon = canonicalLinha(first);
+    if (canon) return canon;
+    return first || (p.subcategoria || '(OUTROS)').toUpperCase();
+  }
+  // BOTICARIO
+  const first = (words[0] || '').toUpperCase();
+  const second = (words[1] || '').toUpperCase();
+  if (BOT_PREFIX.has(first)) return (p.subcategoria || '(OUTROS)').toUpperCase();
+  if (first === 'BOTI' || first === 'BOT') {
+    if (BOTI_SUB_LINHAS.has(second)) return `BOTI ${second}`;
+    // BOTI + generic product type (NECESS, NECESSAIRE, KPACK, ...) → not a linha
+    return (p.subcategoria || '(OUTROS)').toUpperCase();
+  }
+  // Try the canonical list. "CBEM" → "CUIDE-SE BEM" via the abbreviation
+  // map; "MAKE" → "MAKE B." via first-word match; "FLORATTA" exact, etc.
+  const canon = canonicalLinha(first);
+  if (canon) return canon;
+  return first || '(SEM LINHA)';
+}
+for (const p of DATA.products) p.linha = deriveLinha(p);
+
+const actionsByKey = new Map();
+for (const p of DATA.products) {
+  for (const pr of p.promotions) {
+    const normalized = normalizeActionDesc(pr.description);
+    const key = `${p.marca}|${pr.cycle}|${normalized}`;
+    if (!actionsByKey.has(key)) {
+      actionsByKey.set(key, {
+        brand: p.marca,
+        cycle: pr.cycle,
+        cycle_label: pr.cycle_label,
+        description: normalized,
+        rawDescriptions: new Set([pr.description]),
+        type: classifyActionText(pr.description),
+        actionType: pr.actionType || 'outra',  // v2: structural type
+        combo: pr.combo || null,
+        products: [],
+      });
+    } else {
+      // Track that multiple raw descriptions folded into this group
+      actionsByKey.get(key).rawDescriptions.add(pr.description);
+      // If any variant is a different type, prefer mista
+      const t = classifyActionText(pr.description);
+      const cur = actionsByKey.get(key).type;
+      if (t !== cur && (t === 'mista' || cur === 'mista')) {
+        actionsByKey.get(key).type = 'mista';
+      } else if (t !== cur) {
+        actionsByKey.get(key).type = 'mista';
+      }
+      // v2: if any variant has a different actionType, prefer the "stronger" one
+      if (pr.actionType && actionsByKey.get(key).actionType !== pr.actionType) {
+        // Default to whatever comes first in TYPE_ORDER (stronger first)
+        const a = TYPE_ORDER.indexOf(actionsByKey.get(key).actionType);
+        const b = TYPE_ORDER.indexOf(pr.actionType);
+        if (b < a) actionsByKey.get(key).actionType = pr.actionType;
+      }
+    }
+    actionsByKey.get(key).products.push({
+      sku: p.sku,
+      descricao: p.descricao,
+      classe: p.classe,
+      classe_seg: p.classe_seg,
+      categoria: p.categoria,
+      linha: p.linha,  // v2: need for grouping
+      lancamento: p.lancamento,
+      desativacao: p.desativacao,
+      max_hist: p.max_hist,
+      proj_c2: p.proj_c2,
+      discount: pr.discount,
+      combo: pr.combo || null,
+      _promo: pr,  // reference to the original promotion object (used to find sibling actions on the same product)
+    });
+  }
+}
+
+// v2: index brand|type → [{key, action}] for fast lookup when rendering type contents
+const brandTypeActions = new Map();
+for (const [actionKey, act] of actionsByKey) {
+  const t = act.actionType || 'outra';
+  const k = `${act.brand}|${t}`;
+  if (!brandTypeActions.has(k)) brandTypeActions.set(k, []);
+  brandTypeActions.get(k).push({ actionKey, action: act });
+}
+
+// v2: SKU → full product lookup, so we can surface sibling promotions
+// (chips showing the OTHER actions of the same product) on each row.
+const productBySku = new Map();
+for (const p of DATA.products) productBySku.set(String(p.sku), p);
+
+// v2: helpers for rendering action chips. The PRIMARY chip shows the
+// action that owns the current section row; EXTRA chips show the OTHER
+// actions of the same product (so a row in "Desconto Direto" can also
+// reveal that the product has a "Lucro Extra" or "Progressivo" tier).
+function fmtPctList(discs) {
+  if (!discs || !discs.length) return '';
+  // Dedupe identical %s (e.g. "10,0" and "10" written twice) and join
+  // with "/" so the badge reads e.g. "PG 8%/10%". Use comma as decimal
+  // separator to match the PT-BR convention.
+  const seen = new Set();
+  const out = [];
+  for (const d of discs) {
+    const k = `${d.pct}`;
+    if (seen.has(k)) continue;
+    seen.add(k);
+    const num = Number.isInteger(d.pct)
+      ? d.pct.toString()
+      : d.pct.toString().replace('.', ',');
+    out.push(`${num}%`);
+  }
+  return out.join('/');
+}
+function renderActionChips(promo, isPrimary) {
+  if (!promo) return '';
+  const code = promo.shortCode || '??';
+  // Prefer allDiscounts (richer — captures the full ladder of tiers in a
+  // progressivo, the multiple LE tiers in a revendedor-matrix, etc.).
+  // Fall back to the single `discount` value from the spreadsheet when the
+  // description doesn't mention any % explicitly.
+  let text = '';
+  if (promo.allDiscounts && promo.allDiscounts.length) {
+    text = fmtPctList(promo.allDiscounts);
+  } else if (promo.discount != null) {
+    text = Number.isInteger(promo.discount)
+      ? `${promo.discount}%`
+      : `${promo.discount.toString().replace('.', ',')}%`;
+  }
+  if (isPrimary) {
+    return `<span class="row-action" data-code="${escapeHtml(code)}" title="${escapeHtml(promo.description)}">${escapeHtml(code)} ${escapeHtml(text)}</span>`;
+  }
+  return `<span class="row-extra" data-code="${escapeHtml(code)}" title="${escapeHtml(promo.description)}">${escapeHtml(code)} ${escapeHtml(text)}</span>`;
+}
+function renderSiblingChips(product, currentPromo) {
+  if (!product || !product.promotions || product.promotions.length < 2) return '';
+  const others = product.promotions.filter(pr => pr !== currentPromo);
+  if (!others.length) return '';
+  return others.map(pr => renderActionChips(pr, false)).join('');
+}
+
+function allCategories() {
+  const set = new Set();
+  for (const p of DATA.products) set.add(p.categoria);
+  return [...set].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+}
+
+/* ===================== FILTERING ===================== */
+function passesCurvaFilter(p) {
+  return state.curvas.has(classDepth(p.classe));
+}
+function passesLaunchFilter(p) {
+  if (!state.launchesOnly) return true;
+  // Match Lancamento = current cycle code (e.g., "C11")
+  return (p.lancamento || '').toString().toUpperCase() === CURRENT_LANC_CODE.toUpperCase();
+}
+
+function getFilteredActions() {
+  const q = norm(state.q);
+  // Pre-compute SKU/description lookup per action so search is per-product,
+  // not per-action. (Old behaviour: one product match -> whole action shown.)
+  const result = [];
+  for (const act of actionsByKey.values()) {
+    if (state.brand !== 'ALL' && act.brand !== state.brand) continue;
+    const filteredProds = act.products.filter(p => {
+      if (!passesCurvaFilter(p)) return false;
+      if (!passesLaunchFilter(p)) return false;
+      if (state.cats.size && !state.cats.has(p.categoria)) return false;
+      if (q) {
+        // Match per-product: SKU (case-insensitive, allows leading zeros) OR description
+        const sku = (p.sku || '').toString();
+        if (!sku.toLowerCase().includes(q) && !norm(p.descricao).includes(q)) return false;
+      }
+      return true;
+    });
+    if (!filteredProds.length) continue;
+    const a = { ...act, products: filteredProds };
+    // Effective max discount = max of product discount + combo implied discount
+    const ds = filteredProds.map(p => p.discount).filter(d => d != null);
+    let maxD = ds.length ? Math.max(...ds) : 0;
+    if (act.combo && act.combo.disc_pct > maxD) maxD = act.combo.disc_pct;
+    a.maxDiscount = maxD;
+    a.sumHist = filteredProds.reduce((s, p) => s + (p.max_hist || 0), 0);
+    a.nProds = filteredProds.length;
+    result.push(a);
+  }
+  return result;
+}
+
+function sortActions(actions) {
+  const brandOrder = { BOTICARIO: 0, OUI: 1, EUDORA: 2, QDB: 3 };
+  const sorted = [...actions];
+  if (state.sort === 'discount') {
+    sorted.sort((a, b) => {
+      if (a.brand !== b.brand) return (brandOrder[a.brand] ?? 9) - (brandOrder[b.brand] ?? 9);
+      if (a.maxDiscount !== b.maxDiscount) return b.maxDiscount - a.maxDiscount;
+      return b.sumHist - a.sumHist;
+    });
+  } else if (state.sort === 'volume') {
+    sorted.sort((a, b) => {
+      if (a.brand !== b.brand) return (brandOrder[a.brand] ?? 9) - (brandOrder[b.brand] ?? 9);
+      return b.sumHist - a.sumHist;
+    });
+  } else if (state.sort === 'nprods') {
+    sorted.sort((a, b) => {
+      if (a.brand !== b.brand) return (brandOrder[a.brand] ?? 9) - (brandOrder[b.brand] ?? 9);
+      return b.nProds - a.nProds;
+    });
+  } else if (state.sort === 'cycle') {
+    sorted.sort((a, b) => {
+      if (a.brand !== b.brand) return (brandOrder[a.brand] ?? 9) - (brandOrder[b.brand] ?? 9);
+      return a.cycle.localeCompare(b.cycle);
+    });
+  }
+  return sorted;
+}
+
+/* ===================== PRODUCT SORTING ===================== */
+function getSortValue(p, key) {
+  switch (key) {
+    case 'categoria': return norm(p.categoria);
+    case 'classe':    return classSortKey(classDepth(p.classe));
+    case 'discount':  return p.discount == null ? -1 : p.discount;
+    case 'max_hist':  return p.max_hist || 0;
+    case 'proj_c2':   return p.proj_c2 || 0;
+    case 'descricao': return norm(p.descricao);
+    case 'sku':       return p.sku;
+    default:          return 0;
+  }
+}
+
+function sortProducts(prods, sortStack) {
+  if (!sortStack || !sortStack.length) {
+    sortStack = DEFAULT_PRODUCT_SORT;
+  }
+  return [...prods].sort((a, b) => {
+    for (const s of sortStack) {
+      const va = getSortValue(a, s.key);
+      const vb = getSortValue(b, s.key);
+      let cmp;
+      if (typeof va === 'string' || typeof vb === 'string') {
+        cmp = String(va).localeCompare(String(vb), 'pt-BR');
+      } else {
+        cmp = va - vb;
+      }
+      if (cmp !== 0) return s.dir === 'asc' ? cmp : -cmp;
+    }
+    return 0;
+  });
+}
+
+function toggleSort(actionKey, key) {
+  const stack = state.actionSortStacks.get(actionKey) || DEFAULT_PRODUCT_SORT.map(s => ({...s}));
+  const def = COL_DEFS[key];
+  const defaultDir = (def.type === 'number' || def.type === 'discount') ? 'desc' : 'asc';
+  // Find existing entry
+  const idx = stack.findIndex(s => s.key === key);
+  if (idx === -1) {
+    // New column: add at top with sensible default direction
+    stack.unshift({ key, dir: defaultDir });
+  } else if (idx === 0) {
+    // Already at top: toggle direction
+    stack[idx].dir = stack[idx].dir === 'asc' ? 'desc' : 'asc';
+  } else {
+    // In stack but not top: move to top with default direction
+    stack.splice(idx, 1);
+    stack.unshift({ key, dir: defaultDir });
+  }
+  state.actionSortStacks.set(actionKey, stack);
+  render();
+}
+
+/* ===================== RENDER ===================== */
+const BRAND_NAMES = {
+  BOTICARIO: 'O Boticário',
+  EUDORA: 'Eudora',
+  QDB: 'Quem Disse, Berenice?',
+  OUI: 'O.U.i',
+};
+const BRAND_SHORT = {
+  BOTICARIO: 'BOT',
+  EUDORA: 'EUD',
+  QDB: 'QDB',
+  OUI: 'OUI',
+};
+// v2: user-specified ordering — BOT first (where to start visual scan)
+const BRAND_ORDER = ['BOTICARIO', 'EUDORA', 'OUI', 'QDB'];
+
+/* ===================== TOP 5 ===================== */
+// Importance score: combine historical volume + projection + discount
+function productImportance(p) {
+  const hist = p.max_hist || 0;
+  const proj = p.proj_c2 || 0;
+  const disc = p.discount == null ? 0 : p.discount;
+  return (hist * 0.4) + (proj * 0.3) + (disc * 5);
+}
+
+// Build an index: brand|sku -> list of action keys that include this product
+function buildProductActionIndex() {
+  const idx = new Map();
+  for (const act of actionsByKey.values()) {
+    const seen = new Set();
+    for (const p of act.products) {
+      const k = `${act.brand}|${p.sku}`;
+      if (seen.has(k)) continue;
+      seen.add(k);
+      const actionKey = `${act.brand}|${act.cycle}|${act.description}`;
+      if (!idx.has(k)) idx.set(k, []);
+      idx.get(k).push(actionKey);
+    }
+  }
+  return idx;
+}
+const PRODUCT_ACTION_INDEX = buildProductActionIndex();
+
+function getTopProductsForBrand(brand, n = 5) {
+  const prods = DATA.products.filter(p => p.marca === brand);
+  const scored = prods.map(p => {
+    let bestD = 0;
+    for (const pr of p.promotions) {
+      const d = pr.discount;
+      if (d != null && d > bestD) bestD = d;
+    }
+    const score = productImportance({ max_hist: p.max_hist, proj_c2: p.proj_c2, discount: bestD });
+    return { p, score, bestD };
+  });
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, n);
+}
+
+function renderTop5(brand, n = 10) {
+  const top = getTopProductsForBrand(brand, n);
+  if (!top.length) return '';
+  let items = '';
+  top.forEach((t, idx) => {
+    const p = t.p;
+    const actionKey = (PRODUCT_ACTION_INDEX.get(`${brand}|${p.sku}`) || [])[0] || '';
+    const dd = discountDepth(t.bestD || null);
+    const discPill = t.bestD ? `<span class="top5-disc" data-depth="${dd}">${t.bestD}%</span>` : `<span class="dim">—</span>`;
+    items += `
+      <button type="button" class="top5-item" data-action-key="${escapeHtml(actionKey)}" data-sku="${escapeHtml(p.sku)}" data-brand="${escapeHtml(brand)}">
+        <span class="top5-rank">${idx + 1}</span>
+        <span class="top5-sku">${escapeHtml(p.sku)}</span>
+        <span class="top5-desc" title="${escapeHtml(p.descricao)}">${escapeHtml(p.descricao)}</span>
+        <span class="top5-metric" title="Maior volume histórico">vol <strong>${fmt(p.max_hist)}</strong></span>
+        <span class="top5-metric" title="Projeção ciclo +2">proj <strong>${fmt(p.proj_c2)}</strong></span>
+        <span class="top5-disc-cell">${discPill}</span>
+      </button>
+    `;
+  });
+  return `
+    <div class="top5-panel">
+      <div class="top5-head">
+        <span class="brand-mark" data-brand="${brand}" style="width:22px;height:22px;font-size:10px">${BRAND_SHORT[brand]}</span>
+        Top ${n} mais importantes — ${BRAND_NAMES[brand]}
+        <span class="top5-hint">clique pra ir à ação</span>
+      </div>
+      <div class="top5-list">${items}</div>
+    </div>
+  `;
+}
+
+// Render Top 10 panels for all visible brands, above the sticky
+function renderTopPanels() {
+  const visibleBrands = state.brand === 'ALL' ? BRAND_ORDER : [state.brand];
+  return visibleBrands.map(b => renderTop5(b, 10)).join('');
+}
+
+function jumpToAction(actionKey, brand) {
+  // If we were in Top 10 mode, switch back to actions list
+  if (state.top10Mode) {
+    state.top10Mode = false;
+    const tgl = document.getElementById('top10-toggle');
+    if (tgl) tgl.setAttribute('aria-pressed', 'false');
+    // Render with top10 off, then jump after DOM updates
+    render();
+    // Need to wait for render to complete
+    requestAnimationFrame(() => {
+      _scrollAndOpen(actionKey, brand);
+    });
+    return;
+  }
+  _scrollAndOpen(actionKey, brand);
+}
+
+function _scrollAndOpen(actionKey, brand) {
+  if (actionKey) {
+    const el = document.querySelector(`.action[data-action-key="${CSS.escape(actionKey)}"]`);
+    if (el) {
+      el.classList.add('open');
+      requestAnimationFrame(() => {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      return;
+    }
+  }
+  const brandEl = document.querySelector(`.brand-card .brand-mark[data-brand="${brand}"]`);
+  if (brandEl) {
+    brandEl.closest('.brand-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function bindTop5() {
+  document.querySelectorAll('.top5-item').forEach(btn => {
+    btn.onclick = () => jumpToAction(btn.dataset.actionKey, btn.dataset.brand);
+  });
+}
+
+// v2: bind type section + subgroup collapse/expand clicks
+function bindTypes() {
+  document.querySelectorAll('.type-head').forEach(th => {
+    th.onclick = (e) => {
+      const sec = th.closest('.type-section');
+      const key = `${th.dataset.brand}:${th.dataset.type}`;
+      const isOpen = sec.classList.toggle('open');
+      // Marca o estado como inicializado e sincroniza apenas o que mudou
+      state.typesOpenInitialized = true;
+      if (isOpen) state.typesOpen.add(key);
+      else state.typesOpen.delete(key);
+      e.stopPropagation();
+    };
+  });
+
+  // Subgroup click handler
+  document.querySelectorAll('.subgroup-head').forEach(sh => {
+    sh.onclick = (e) => {
+      const sg = sh.closest('.subgroup');
+      const key = sg.dataset.sgKey;
+      const isOpen = !sg.classList.contains('collapsed');
+      if (isOpen) {
+        sg.classList.add('collapsed');
+        state.subgroupsOpen.delete(key);
+      } else {
+        sg.classList.remove('collapsed');
+        state.subgroupsOpen.add(key);
+      }
+      state.subgroupsOpenInitialized = true;
+      e.stopPropagation();
+    };
+  });
+}
+
+function renderHeaderMetrics() {
+  // Overall totals (independent of current brand filter)
+  const overall = { BOTICARIO: new Set(), OUI: new Set(), EUDORA: new Set(), QDB: new Set() };
+  for (const a of actionsByKey.values()) {
+    const seen = new Set();
+    for (const p of a.products) {
+      if (!seen.has(p.sku)) {
+        seen.add(p.sku);
+        if (overall[a.brand]) overall[a.brand].add(p.sku);
+      }
+    }
+  }
+  const totalSkus = new Set();
+  for (const s of Object.values(overall)) for (const k of s) totalSkus.add(k);
+  document.getElementById('m-itens').textContent = totalSkus.size;
+  document.getElementById('m-grupos').textContent = actionsByKey.size;
+  document.getElementById('m-boti').textContent = overall.BOTICARIO.size;
+  document.getElementById('m-oui').textContent = overall.OUI.size;
+  document.getElementById('m-eudora').textContent = overall.EUDORA.size;
+  document.getElementById('m-qdb').textContent = overall.QDB.size;
+  document.getElementById('m-boti-grp').textContent = [...actionsByKey.values()].filter(a => a.brand === 'BOTICARIO').length;
+  document.getElementById('m-oui-grp').textContent = [...actionsByKey.values()].filter(a => a.brand === 'OUI').length;
+  document.getElementById('m-eudora-grp').textContent = [...actionsByKey.values()].filter(a => a.brand === 'EUDORA').length;
+  document.getElementById('m-qdb-grp').textContent = [...actionsByKey.values()].filter(a => a.brand === 'QDB').length;
+
+  // Highlight active brand card
+  document.querySelectorAll('.metric').forEach(m => m.classList.remove('active'));
+  const activeEl = document.querySelector(`.metric[data-brand-metric="${state.brand}"]`);
+  if (activeEl) activeEl.classList.add('active');
+}
+
+function updateCounts() {
+  // Per-brand: SKU counts (only products that pass curva filter)
+  const c = { ALL: 0, BOTICARIO: 0, EUDORA: 0, QDB: 0, OUI: 0 };
+  const skuSet = { ALL: new Set(), BOTICARIO: new Set(), EUDORA: new Set(), QDB: new Set(), OUI: new Set() };
+  for (const p of DATA.products) {
+    if (!passesCurvaFilter(p)) continue;
+    if (!passesLaunchFilter(p)) continue;
+    const k = `${p.marca}-${p.sku}`;
+    skuSet.ALL.add(k);
+    skuSet[p.marca].add(k);
+  }
+  for (const k of Object.keys(c)) c[k] = skuSet[k].size;
+  document.getElementById('cnt-all').textContent = c.ALL;
+  document.getElementById('cnt-boti').textContent = c.BOTICARIO;
+  document.getElementById('cnt-eudora').textContent = c.EUDORA;
+  document.getElementById('cnt-qdb').textContent = c.QDB;
+  document.getElementById('cnt-oui').textContent = c.OUI;
+}
+
+function renderSortHeaders(actionKey, sortStack) {
+  const stack = sortStack || DEFAULT_PRODUCT_SORT;
+  const stackMap = new Map(stack.map((s, i) => [s.key, { dir: s.dir, pos: i + 1 }]));
+  let html = '<th style="width:84px">SKU</th>';
+  for (const [key, def] of Object.entries(COL_DEFS)) {
+    if (key === 'sku') continue;
+    const sortable = def.sortable ? 'sortable' : '';
+    const sorted = stackMap.has(key);
+    const cls = sorted ? `sorted sorted-${stackMap.get(key).dir}` : '';
+    const pos = sorted ? `<span class="sort-pos">${stackMap.get(key).pos}</span>` : '';
+    const arrow = sorted ? '<span class="sort-arrow"></span>' : '<span class="sort-arrow">⇅</span>';
+    html += `<th class="${sortable} ${cls}" data-col="${key}">${def.label}${arrow}${pos}</th>`;
+  }
+  return html;
+}
+
+function renderTypeContents(brand, type, filteredActions) {
+  // v2: render products of actions in (brand, type), grouped by axis,
+  // without an intermediate action card. Each row carries a tooltip showing
+  // the parent action's description.
+  // Use the *filtered* actions list (brand/category/curva/search filters) so
+  // the search box and other filters actually hide non-matching rows.
+  const acts = (filteredActions || []).filter(a =>
+    a.brand === brand && (a.actionType || 'outra') === type
+  ).map(a => ({ actionKey: `${a.brand}|${a.cycle}|${a.description}`, action: a }));
+  if (!acts.length) return '';
+
+  const axis = state.axis;
+  const secondaryField = AXIS_SECONDARY[axis];
+  const secondaryLabel = AXIS_SECONDARY_LABEL[axis];
+  const axisLabel = AXIS_LABEL[axis];
+
+  // Collect (product, action_meta) across all actions of this type
+  const allRows = [];
+  for (const { actionKey, action: a } of acts) {
+    const typeLabels = { consumidor: 'Consumidor', revendedor: 'Revendedor', mista: 'Mista', outra: 'Outra' };
+    const promoRole = typeLabels[a.type] || a.type;
+    for (const p of a.products) {
+      const dd = discountDepth(p.discount);
+      const discText = p.discount != null ? `${p.discount}%` : '—';
+      const tipAttr = `${a.cycle_label} · ${promoRole} · ${a.description}`;
+      const tipText  = `Ciclo ${a.cycle_label} • ${promoRole}\n${a.description}`;
+      allRows.push({ product: p, actionKey, discDepth: dd, discText, tipAttr, tipText });
+    }
+  }
+
+  // Group by axis
+  const buckets = new Map();
+  for (const row of allRows) {
+    const p = row.product;
+    let groupKey;
+    if (axis === 'desconto') {
+      const band = depthBandFor(p.discount);
+      groupKey = band ? band.label : '—';
+    } else if (axis === 'categoria') {
+      groupKey = p.categoria || '(vazio)';
+    } else {
+      groupKey = p.linha || '(vazio)';
+    }
+    if (!buckets.has(groupKey)) buckets.set(groupKey, []);
+    buckets.get(groupKey).push(row);
+  }
+  const sortedKeys = [...buckets.keys()].sort((a, b) => {
+    if (axis === 'desconto') {
+      const ba = DEPTH_BANDS.find(x => x.label === a);
+      const bb = DEPTH_BANDS.find(x => x.label === b);
+      return (ba?.lo ?? 0) - (bb?.lo ?? 0);
+    }
+    return a.localeCompare(b, 'pt-BR');
+  });
+
+  let html = '';
+  for (const key of sortedKeys) {
+    const rows = buckets.get(key);
+    // v2 row-sort: optional final sort override applied WITHIN each subgroup.
+    // 'default' = Categ > Curva > Descrição > Desconto > MaxHist
+    if (state.rowSort === 'discount-desc') {
+      rows.sort((a, b) => {
+        const da = a.product.discount == null ? -1 : a.product.discount;
+        const db = b.product.discount == null ? -1 : b.product.discount;
+        return db - da;
+      });
+    } else if (state.rowSort === 'max_hist-desc') {
+      rows.sort((a, b) => (b.product.max_hist || 0) - (a.product.max_hist || 0));
+    } else if (state.rowSort === 'proj_c2-desc') {
+      rows.sort((a, b) => (b.product.proj_c2 || 0) - (a.product.proj_c2 || 0));
+    } else {
+      rows.sort((a, b) => {
+        const pa = a.product, pb = b.product;
+        if (pa.categoria !== pb.categoria) return pa.categoria.localeCompare(pb.categoria, 'pt-BR');
+        const ca = classSortKey(classDepth(pa.classe));
+        const cb = classSortKey(classDepth(pb.classe));
+        if (ca !== cb) return ca - cb;
+        const cmp = pa.descricao.localeCompare(pb.descricao, 'pt-BR');
+        if (cmp !== 0) return cmp;
+        const da = pa.discount == null ? -1 : pa.discount;
+        const db = pb.discount == null ? -1 : pb.discount;
+        if (da !== db) return db - da;
+        return (pb.max_hist || 0) - (pa.max_hist || 0);
+      });
+    }
+    const sgKey = `${brand}|${type}|${key}`;
+    const sgOpen = state.subgroupsOpen.has(sgKey);
+    // Default: tudo recolhido na primeira carga; após init, segue o set.
+    const sgClosed = state.subgroupsOpenInitialized ? !sgOpen : true;
+    html += `<div class="subgroup${sgClosed ? ' collapsed' : ''}" data-sg-key="${escapeHtml(sgKey)}">`;
+    html += `
+      <div class="subgroup-head">
+        <span>${axisLabel}</span>
+        <span class="subgroup-name">${escapeHtml(key)}</span>
+        <span class="subgroup-count">· ${rows.length} produto${rows.length === 1 ? '' : 's'}</span>
+        <svg class="subgroup-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="subgroup-body">
+    `;
+    for (const row of rows) {
+      const p = row.product;
+      const fullProduct = productBySku.get(String(p.sku));
+      const currentPromo = p._promo;
+      const primaryChip = renderActionChips(currentPromo, true);
+      const siblingChips = renderSiblingChips(fullProduct, currentPromo);
+      // Row layout (left → right):
+      //   1. Primary action chip (the action that owns this section row)
+      //   2. SKU
+      //   3. Curva (A/B/C)
+      //   4. Descrição
+      //   5. Sibling action chips (other actions of the same product)
+      //   6. Linha (just the name, no label)
+      // Right-aligned (via .volproj margin-left:auto):
+      //   vol · proj
+      html += `
+        <div class="product-row" data-tip="${escapeHtml(row.tipAttr)}" title="${escapeHtml(row.tipText)}">
+          ${primaryChip}
+          <span class="sku">${escapeHtml(p.sku)}</span>
+          <span class="cl-badge" data-cl="${classDepth(p.classe)}">${escapeHtml(p.classe)}</span>
+          <span class="desc">${escapeHtml(p.descricao)}</span>
+          ${siblingChips}
+          <span class="linha-pill">${escapeHtml(p.linha || '—')}</span>
+          <span class="volproj">vol <strong>${fmt(p.max_hist)}</strong> · proj <strong>${fmt(p.proj_c2)}</strong></span>
+        </div>
+      `;
+    }
+    html += `</div></div>`;
+  }
+  return html;
+}
+
+function renderAction(a) {
+  const actionKey = `${a.brand}|${a.cycle}|${a.description}`;
+  const sortStack = state.actionSortStacks.get(actionKey);
+  const tr = truncate(a.description, 360);
+  const descDataAttr = tr.truncated ? `data-full="${escapeHtml(a.description)}" data-truncated="true"` : '';
+
+  // Effective max discount (including combo if present)
+  const effMax = a.maxDiscount;
+  const effDepth = discountDepth(effMax);
+  const effText = effMax > 0 ? (effMax % 1 === 0 ? `${effMax}%` : `${effMax}%`) : 's/ desc.';
+
+  const comboBadge = a.combo ? `<span class="combo-badge">${a.combo.display} <span class="arrow">≈ ${a.combo.disc_pct}% implícito</span></span>` : '';
+  const typeLabels = { consumidor: 'Consumidor', revendedor: 'Revendedor', mista: 'Consumidor + Revendedor', outra: 'Outra' };
+  const typeBadge = `<span class="type-badge" data-type="${a.type}">${typeLabels[a.type] || a.type}</span>`;
+
+  // ---- v2: group products by chosen axis inside this action ----
+  const axis = state.axis;
+  const secondaryField = AXIS_SECONDARY[axis];
+  const secondaryLabel = AXIS_SECONDARY_LABEL[axis];
+  const axisLabel = AXIS_LABEL[axis];
+
+  // bucketize
+  const buckets = new Map();
+  for (const p of a.products) {
+    let key;
+    if (axis === 'desconto') {
+      const band = depthBandFor(p.discount);
+      key = band ? band.label : '—';
+    } else {
+      key = p[secondaryField === 'categoria' ? 'categoria' : 'linha'] || '(vazio)';
+    }
+    // Wait: secondaryField is what WE SHOW on the row, not the grouping field.
+    // The grouping field comes from the same axis.
+    let groupKey;
+    if (axis === 'desconto') {
+      const band = depthBandFor(p.discount);
+      groupKey = band ? band.label : '—';
+    } else if (axis === 'categoria') {
+      groupKey = p.categoria || '(vazio)';
+    } else { // linha
+      groupKey = p.linha || '(vazio)';
+    }
+    if (!buckets.has(groupKey)) buckets.set(groupKey, []);
+    buckets.get(groupKey).push(p);
+  }
+  // sort bucket keys
+  const sortedKeys = [...buckets.keys()].sort((a, b) => {
+    if (axis === 'desconto') {
+      const ba = DEPTH_BANDS.find(b => b.label === a);
+      const bb = DEPTH_BANDS.find(b => b.label === b);
+      return (ba?.lo ?? 0) - (bb?.lo ?? 0);
+    }
+    return a.localeCompare(b, 'pt-BR');
+  });
+
+  // build body — list of subgroups, each with a small table
+  let body = '';
+  for (const key of sortedKeys) {
+    const prods = buckets.get(key);
+    const sortedProds = sortProducts(prods, sortStack);
+    body += `<div class="subgroup">`;
+    body += `
+      <div class="subgroup-head">
+        <span>${axisLabel}</span>
+        <span class="subgroup-name">${escapeHtml(key)}</span>
+        <span class="subgroup-count">· ${prods.length} produto${prods.length === 1 ? '' : 's'}</span>
+      </div>
+      <div class="table-wrap">
+      <table class="products">
+        <thead><tr>
+          ${renderSortHeaders(actionKey, sortStack)}
+        </tr></thead>
+        <tbody>
+    `;
+    for (const p of sortedProds) {
+      const dd = discountDepth(p.discount);
+      body += `
+        <tr>
+          <td class="sku">${escapeHtml(p.sku)}</td>
+          <td class="desc">${escapeHtml(p.descricao)}<span class="secondary-info">${secondaryLabel}: ${escapeHtml(p[secondaryField] || '—')}</span></td>
+          <td class="cat-cell">${escapeHtml(p.categoria)}</td>
+          <td><span class="cl-badge" data-cl="${classDepth(p.classe)}">${escapeHtml(p.classe)}</span></td>
+          <td>${p.discount != null ? `<span class="row-disc" data-depth="${dd}">${p.discount}%</span>` : `<span class="dim">—</span>`}</td>
+          <td class="num">${fmt(p.max_hist)}</td>
+          <td class="num">${fmt(p.proj_c2)}</td>
+        </tr>
+      `;
+    }
+    body += `</tbody></table></div></div>`;
+  }
+
+  return `
+    <article class="action" data-action-key="${escapeHtml(actionKey)}">
+      <div class="action-head">
+        <div class="action-head-row1">
+          <span class="disc-badge" data-depth="${effDepth}">${effText}</span>
+          ${typeBadge}
+          ${comboBadge}
+          <span class="cycle-pill">${escapeHtml(a.cycle_label)}</span>
+          <span class="action-summary">${a.products.length} ${a.products.length === 1 ? 'produto' : 'produtos'}
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="action-desc" ${descDataAttr}>${escapeHtml(tr.text)}</div>
+      </div>
+      <div class="action-body">${body}</div>
+    </article>
+  `;
+}
+
+function renderHeaderMetrics() {
+  // Overall totals (independent of current brand filter)
+  const overall = { BOTICARIO: new Set(), OUI: new Set(), EUDORA: new Set(), QDB: new Set() };
+  for (const a of actionsByKey.values()) {
+    const seen = new Set();
+    for (const p of a.products) {
+      if (!seen.has(p.sku)) {
+        seen.add(p.sku);
+        if (overall[a.brand]) overall[a.brand].add(p.sku);
+      }
+    }
+  }
+  const totalSkus = new Set();
+  for (const s of Object.values(overall)) for (const k of s) totalSkus.add(k);
+  document.getElementById('m-itens').textContent = totalSkus.size;
+  document.getElementById('m-grupos').textContent = actionsByKey.size;
+  document.getElementById('m-boti').textContent = overall.BOTICARIO.size;
+  document.getElementById('m-oui').textContent = overall.OUI.size;
+  document.getElementById('m-eudora').textContent = overall.EUDORA.size;
+  document.getElementById('m-qdb').textContent = overall.QDB.size;
+  document.getElementById('m-boti-grp').textContent = [...actionsByKey.values()].filter(a => a.brand === 'BOTICARIO').length;
+  document.getElementById('m-oui-grp').textContent = [...actionsByKey.values()].filter(a => a.brand === 'OUI').length;
+  document.getElementById('m-eudora-grp').textContent = [...actionsByKey.values()].filter(a => a.brand === 'EUDORA').length;
+  document.getElementById('m-qdb-grp').textContent = [...actionsByKey.values()].filter(a => a.brand === 'QDB').length;
+
+  // Highlight active brand card
+  document.querySelectorAll('#hero-metrics .metric').forEach(m => m.classList.remove('active'));
+  const activeEl = document.querySelector(`#hero-metrics .metric[data-brand-metric="${state.brand}"]`);
+  if (activeEl) activeEl.classList.add('active');
+}
+
+function render() {
+  const main = document.getElementById('content');
+  const actions = sortActions(getFilteredActions());
+
+  updateCounts();
+  renderHeaderMetrics();
+
+  // Update hero cycle label
+  const heroCycle = document.getElementById('hero-cycle');
+  if (heroCycle) {
+    heroCycle.textContent = `Ciclo ${CURRENT_CYCLE.slice(-2)}/${CURRENT_CYCLE.slice(0,4)}`;
+  }
+
+  // Top panels above sticky — only shown when NOT in top10 mode
+  const topPanels = document.getElementById('top-panels');
+  if (topPanels) {
+    topPanels.innerHTML = state.top10Mode ? '' : '';
+    topPanels.style.display = 'none';
+  }
+
+  document.getElementById('s-actions').textContent = actions.length;
+  const skuSet = new Set();
+  for (const a of actions) for (const p of a.products) skuSet.add(`${a.brand}-${p.sku}`);
+  document.getElementById('s-skus').textContent = skuSet.size;
+
+  // Branch: top10 mode or actions mode
+  if (state.top10Mode) {
+    main.innerHTML = renderTop10FullView();
+    bindTop5();
+    return;
+  }
+
+  if (!actions.length) {
+    main.innerHTML = '<div class="empty">Nenhuma ação encontrada com os filtros atuais.</div>';
+    bindTop5();
+    return;
+  }
+
+  const byBrand = new Map();
+  for (const a of actions) {
+    if (!byBrand.has(a.brand)) byBrand.set(a.brand, []);
+    byBrand.get(a.brand).push(a);
+  }
+
+  let html = '';
+  for (const brand of BRAND_ORDER) {
+    const list = byBrand.get(brand);
+    if (!list || !list.length) continue;
+    const skuSet2 = new Set();
+    for (const a of list) for (const p of a.products) skuSet2.add(`${brand}-${p.sku}`);
+
+    // v2: group actions by structural type within this brand
+    const byType = new Map();
+    for (const a of list) {
+      const t = a.actionType || 'outra';
+      if (!byType.has(t)) byType.set(t, []);
+      byType.get(t).push(a);
+    }
+
+    html += `
+      <section class="brand-section">
+        <div class="brand-card">
+          <div class="brand-header">
+            <div class="brand-mark" data-brand="${brand}">${BRAND_SHORT[brand]}</div>
+            <div class="brand-title">${BRAND_NAMES[brand]}</div>
+            <div class="brand-meta">
+              <strong>${list.length}</strong> ações · <strong>${skuSet2.size}</strong> SKUs
+            </div>
+          </div>
+    `;
+
+    for (const t of TYPE_ORDER) {
+      const typeActions = byType.get(t);
+      if (!typeActions || !typeActions.length) continue;
+      const typeSku = new Set();
+      for (const a of typeActions) for (const p of a.products) typeSku.add(p.sku);
+      // Default colapsado na primeira carga; depois segue state.typesOpen.
+      const typeOpen = state.typesOpenInitialized ? state.typesOpen.has(`${brand}:${t}`) : false;
+
+      html += `
+        <div class="type-section ${typeOpen ? 'open' : ''}" data-brand="${brand}" data-type="${t}">
+          <div class="type-head" data-brand="${brand}" data-type="${t}">
+            <span class="type-mark" data-type="${t}"></span>
+            <span class="type-name">${TYPE_NAMES[t]}</span>
+            <span class="type-meta"><strong>${typeSku.size}</strong> SKU${typeSku.size === 1 ? '' : 's'}
+              <svg class="type-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </div>
+          <div class="type-body">
+            ${renderTypeContents(brand, t, actions)}
+          </div></div>
+    `;
+    }
+    html += `</div></section>`;
+  }
+  main.innerHTML = html;
+  // Sync type toggle UI with state
+  if (state.typesOpen.size > 0) {
+    document.querySelectorAll('.type-section').forEach(ts => {
+      const key = `${ts.dataset.brand}:${ts.dataset.type}`;
+      if (state.typesOpen.has(key)) ts.classList.add('open');
+      else ts.classList.remove('open');
+    });
+  }
+  bindTypes();
+  bindTop5();
+}
+
+/* Render a big Top 10 view (when toggle is on): one panel per brand */
+function renderTop10FullView() {
+  const visibleBrands = state.brand === 'ALL' ? BRAND_ORDER : [state.brand];
+  const html = visibleBrands.map(brand => {
+    const top = getTopProductsForBrand(brand, 10);
+    if (!top.length) return '';
+    let rows = '';
+    top.forEach((t, idx) => {
+      const p = t.p;
+      const actionKey = (PRODUCT_ACTION_INDEX.get(`${brand}|${p.sku}`) || [])[0] || '';
+      const dd = discountDepth(t.bestD || null);
+      const discPill = t.bestD ? `<span class="top5-disc" data-depth="${dd}">${t.bestD}%</span>` : `<span class="dim">—</span>`;
+      rows += `
+        <button type="button" class="top5-item top10-full-row" data-action-key="${escapeHtml(actionKey)}" data-sku="${escapeHtml(p.sku)}" data-brand="${escapeHtml(brand)}">
+          <span class="top5-rank">${idx + 1}</span>
+          <span class="top5-sku">${escapeHtml(p.sku)}</span>
+          <span class="top5-desc" title="${escapeHtml(p.descricao)}">${escapeHtml(p.descricao)}</span>
+          <span class="top10-cat" title="${escapeHtml(p.categoria)}">${escapeHtml(p.categoria)}</span>
+          <span class="top10-cl"><span class="cl-badge" data-cl="${classDepth(p.classe)}">${escapeHtml(p.classe)}</span></span>
+          <span class="top5-metric" title="Maior volume histórico">vol <strong>${fmt(p.max_hist)}</strong></span>
+          <span class="top5-metric" title="Projeção ciclo +2">proj <strong>${fmt(p.proj_c2)}</strong></span>
+          <span class="top5-disc-cell">${discPill}</span>
+        </button>
+      `;
+    });
+    return `
+      <section class="brand-section">
+        <div class="brand-card">
+          <div class="brand-header">
+            <div class="brand-mark" data-brand="${brand}">${BRAND_SHORT[brand]}</div>
+            <div class="brand-title">${BRAND_NAMES[brand]} · Top 10</div>
+          </div>
+          <div class="top10-grid">
+            <div class="top10-grid-head">
+              <span class="top5-rank head">#</span>
+              <span class="top5-sku head">SKU</span>
+              <span class="top5-desc head">Descrição</span>
+              <span class="top10-cat head">Categoria</span>
+              <span class="top10-cl head">Curva</span>
+              <span class="top5-metric head">Maior vol.</span>
+              <span class="top5-metric head">Projeção C+2</span>
+              <span class="top5-disc-cell head">Desc.</span>
+            </div>
+            <div class="top10-grid-body">${rows}</div>
+          </div>
+        </div>
+      </section>
+    `;
+  }).join('');
+  return html || '<div class="empty">Nenhum item para exibir.</div>';
+}
+
+/* ===================== TOGGLES ===================== */
+function bindToggles() {
+  document.querySelectorAll('.action-head').forEach(h => {
+    h.onclick = (e) => {
+      if (e.target.closest('.action-desc[data-truncated="true"]')) return;
+      h.parentElement.classList.toggle('open');
+    };
+  });
+  document.querySelectorAll('.action-desc[data-truncated="true"]').forEach(d => {
+    const full = d.dataset.full;
+    d.onclick = (e) => {
+      e.stopPropagation();
+      if (d.classList.contains('expanded')) {
+        d.classList.remove('expanded');
+        d.removeAttribute('data-truncated');
+        d.textContent = truncate(full, 360).text;
+        d.setAttribute('data-truncated', 'true');
+      } else {
+        d.classList.add('expanded');
+        d.removeAttribute('data-truncated');
+        d.textContent = full;
+      }
+    };
+  });
+  // Sortable headers
+  document.querySelectorAll('.action .products thead th.sortable').forEach(th => {
+    const actionKey = th.closest('.action').dataset.actionKey;
+    const colKey = th.dataset.col;
+    th.onclick = () => toggleSort(actionKey, colKey);
+  });
+}
+
+/* ===================== WIRING ===================== */
+document.querySelectorAll('.chip[data-brand]').forEach(c => {
+  c.onclick = () => {
+    document.querySelectorAll('.chip[data-brand]').forEach(x => x.setAttribute('aria-pressed', 'false'));
+    c.setAttribute('aria-pressed', 'true');
+    state.brand = c.dataset.brand;
+    render();
+  };
+});
+
+document.querySelectorAll('.chip-curva').forEach(c => {
+  c.onclick = () => {
+    const cl = c.dataset.cl;
+    if (state.curvas.has(cl)) {
+      // Don't allow deselecting all
+      if (state.curvas.size === 1) return;
+      state.curvas.delete(cl);
+      c.setAttribute('aria-pressed', 'false');
+    } else {
+      state.curvas.add(cl);
+      c.setAttribute('aria-pressed', 'true');
+    }
+    render();
+  };
+});
+
+document.getElementById('expand-all').onclick = () => {
+  // Open all type sections + all subgroups
+  document.querySelectorAll('.type-section').forEach(ts => {
+    ts.classList.add('open');
+    state.typesOpen.add(`${ts.dataset.brand}:${ts.dataset.type}`);
+  });
+  document.querySelectorAll('.subgroup').forEach(sg => {
+    sg.classList.remove('collapsed');
+    state.subgroupsOpen.add(sg.dataset.sgKey);
+  });
+  state.subgroupsOpenInitialized = true;
+  state.typesOpenInitialized = true;
+};
+document.getElementById('collapse-all').onclick = () => {
+  document.querySelectorAll('.type-section').forEach(ts => ts.classList.remove('open'));
+  document.querySelectorAll('.subgroup').forEach(sg => sg.classList.add('collapsed'));
+  state.typesOpen.clear();
+  state.subgroupsOpen.clear();
+  state.subgroupsOpenInitialized = true;
+  state.typesOpenInitialized = true;
+};
+
+document.getElementById('search').oninput = (e) => {
+  state.q = e.target.value;
+  render();
+};
+
+document.getElementById('sort').onchange = (e) => {
+  state.sort = e.target.value;
+  render();
+};
+
+// v2: per-subgroup final sort (desconto / vol hist / proj)
+document.getElementById('row-sort').onchange = (e) => {
+  state.rowSort = e.target.value;
+  render();
+};
+
+// Theme toggle — default is gray; click switches to white
+document.getElementById('theme-toggle').onclick = () => {
+  if (state.theme === 'gray') {
+    document.body.classList.add('theme-white');
+    state.theme = 'white';
+    document.getElementById('theme-icon').textContent = '◑';
+  } else {
+    document.body.classList.remove('theme-white');
+    state.theme = 'gray';
+    document.getElementById('theme-icon').textContent = '◐';
+  }
+};
+state.theme = 'gray'; // default
+
+// Launch cycle toggle
+document.getElementById('launch-toggle').onclick = () => {
+  state.launchesOnly = !state.launchesOnly;
+  document.getElementById('launch-toggle').setAttribute('aria-pressed', state.launchesOnly ? 'true' : 'false');
+  render();
+};
+
+// Top 10 mode toggle
+document.getElementById('top10-toggle').onclick = () => {
+  state.top10Mode = !state.top10Mode;
+  document.getElementById('top10-toggle').setAttribute('aria-pressed', state.top10Mode ? 'true' : 'false');
+  render();
+};
+
+// v2: Axis toggle (Categoria / Linha / Profundidade)
+document.querySelectorAll('#axis-toggle button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('#axis-toggle button').forEach(x => x.setAttribute('aria-pressed', 'false'));
+    b.setAttribute('aria-pressed', 'true');
+    state.axis = b.dataset.axis;
+    render();
+  };
+});
+
+// Reset all filters
+document.getElementById('reset-all').onclick = () => {
+  state.brand = 'ALL';
+  state.curvas = new Set(['A', 'B', 'C', 'X']);
+  state.cats = new Set();
+  state.q = '';
+  state.sort = 'discount';
+  state.launchesOnly = false;
+  state.top10Mode = false;
+  state.axis = 'categoria';
+  state.typesOpen = new Set();
+  state.typesOpenInitialized = false;
+  state.subgroupsOpen = new Set();
+  state.subgroupsOpenInitialized = false;
+  state.rowSort = 'default';
+  state.actionSortStacks = new Map();
+  // Sync UI controls
+  document.querySelectorAll('.chip[data-brand]').forEach(x => x.setAttribute('aria-pressed', x.dataset.brand === 'ALL' ? 'true' : 'false'));
+  document.querySelectorAll('.chip-curva').forEach(x => x.setAttribute('aria-pressed', 'true'));
+  document.querySelectorAll('#axis-toggle button').forEach(x => x.setAttribute('aria-pressed', x.dataset.axis === 'categoria' ? 'true' : 'false'));
+  document.getElementById('search').value = '';
+  document.getElementById('sort').value = 'discount';
+  document.getElementById('launch-toggle').setAttribute('aria-pressed', 'false');
+  document.getElementById('top10-toggle').setAttribute('aria-pressed', 'false');
+  catLabel.textContent = 'Filtrar categoria: Todas';
+  // Close any open dropdown
+  catMenu.classList.remove('open');
+  render();
+};
+
+// Category dropdown
+const catTrigger = document.getElementById('cat-trigger');
+const catMenu = document.getElementById('cat-menu');
+const catOptions = document.getElementById('cat-options');
+const catLabel = document.getElementById('cat-label');
+
+function renderCatOptions() {
+  const cats = allCategories();
+  const counts = {};
+  for (const c of cats) counts[c] = 0;
+  for (const p of DATA.products) {
+    if (!passesCurvaFilter(p)) continue;
+    if (state.brand !== 'ALL' && p.marca !== state.brand) continue;
+    counts[p.categoria] = (counts[p.categoria] || 0) + 1;
+  }
+  catOptions.innerHTML = cats.map(c => `
+    <label>
+      <input type="checkbox" value="${escapeHtml(c)}" ${state.cats.has(c) ? 'checked' : ''}/>
+      <span>${escapeHtml(c)} <span class="dim" style="font-size:11px">(${counts[c] || 0})</span></span>
+    </label>
+  `).join('');
+  catOptions.querySelectorAll('input').forEach(inp => {
+    inp.onchange = () => {
+      if (inp.checked) state.cats.add(inp.value);
+      else state.cats.delete(inp.value);
+      updateCatLabel();
+      render();
+    };
+  });
+  updateCatLabel();
+}
+function updateCatLabel() {
+  if (!state.cats.size) {
+    catLabel.textContent = 'Filtrar categoria: Todas';
+  } else if (state.cats.size === 1) {
+    catLabel.textContent = `Categoria: ${[...state.cats][0]}`;
+  } else {
+    catLabel.textContent = `Categorias: ${state.cats.size} selecionadas`;
+  }
+}
+catTrigger.onclick = (e) => {
+  e.stopPropagation();
+  catMenu.classList.toggle('open');
+  if (catMenu.classList.contains('open')) renderCatOptions();
+};
+document.getElementById('cat-all').onclick = (e) => {
+  e.stopPropagation();
+  document.querySelectorAll('#cat-menu input').forEach(i => { i.checked = true; state.cats.add(i.value); });
+  updateCatLabel();
+  render();
+};
+document.getElementById('cat-none').onclick = (e) => {
+  e.stopPropagation();
+  document.querySelectorAll('#cat-menu input').forEach(i => { i.checked = false; state.cats.delete(i.value); });
+  updateCatLabel();
+  render();
+};
+document.addEventListener('click', (e) => {
+  if (!catMenu.contains(e.target) && !catTrigger.contains(e.target)) {
+    catMenu.classList.remove('open');
+  }
+});
+
+/* ===================== INIT ===================== */
+updateCounts();
+render();
+</script>
+</body>
+</html>
